@@ -40,13 +40,11 @@ color:#0099cc;
 font-size:32px;
 }
 
-.plan{
-margin-left:20px;
-line-height:2;
-font-size:30px;
-display:flex;
-flex-direction: column; /* 縦並びに変更 */
-align-items:flex-start;
+.plan > div:last-child {
+  display: flex;        /* ボタンを横並びに */
+  flex-wrap: wrap;      /* 画面狭くても折り返す */
+  gap: 5px;             /* ボタン間の隙間 */
+  margin-top: 8px;      /* 上との余白 */
 }
 
 .plan .controls {
@@ -345,11 +343,7 @@ cursor:pointer;
 
 
 
-.plan > div:last-child {
-  display: flex;
-  flex-wrap: wrap;  /* 画面狭いと次の行に回る */
-  gap: 5px;         /* ボタン間の隙間 */
-}
+
 
 
 
