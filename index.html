@@ -266,6 +266,27 @@ transform:translateY(0);
 
 
 
+.daynav{
+text-align:center;
+margin-top:20px;
+}
+
+.daynav a{
+display:inline-block;
+padding:10px 20px;
+margin:5px;
+background:#0099cc;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.daynav a:hover{
+background:#0077aa;
+}
+
+
 </style>
 </head>
 
@@ -290,13 +311,23 @@ transform:translateY(0);
 
 <header>
 沖縄3泊4日の旅プラン
+
+<div class="daynav">
+
+<a href="#day1">Day1</a>
+<a href="#day2">Day2</a>
+<a href="#day3">Day3</a>
+<a href="#day4">Day4</a>
+
+</div>
 </header>
 
 <div class="container">
 
 <!-- Day1 -->
 
-<div class="day">
+<div class="day" id="day1"></div>
+
 
 <h2>Day1 (3月12日)</h2>
 
@@ -402,7 +433,7 @@ transform:translateY(0);
 
 <!-- Day2 -->
 
-<div class="day">
+<div class="day" id="day2"></div>
 <h2>Day2 (3月13日)</h2>
 
 <div id="day2plans"></div>
@@ -415,7 +446,7 @@ transform:translateY(0);
 
 <!-- Day3 -->
 
-<div class="day">
+<div class="day" id="day3"></div>
 <h2>Day3 (3月14日)</h2>
 
 <div id="day3plans"></div>
@@ -428,7 +459,7 @@ transform:translateY(0);
 
 <!-- Day4 -->
 
-<div class="day">
+<div class="day" id="day4"></div>
 <h2>Day4 (3月15日)</h2>
 
 <div id="day4plans"></div>
