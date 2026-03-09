@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0099cc">
-
 <meta charset="UTF-8">
 <title>沖縄3泊4日の旅プラン</title>
 
@@ -275,6 +271,107 @@ background:#444;
 
 <script>
 
+const STORAGE_KEY = "okinawaTripData";
+
+function saveData(){
+const data={};
+
+["day1","day2","day3","day4"].forEach(day=>{
+let container=document.getElementById(day+"plans");
+let plans=[...container.querySelectorAll(".plan")];
+
+data[day]=plans.map(plan=>{
+return{
+text:plan.querySelector("span").innerText,
+img:plan.querySelector("img").src
+}
+});
+});
+
+localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+}
+
+function loadData(){
+
+const saved=localStorage.getItem(STORAGE_KEY);
+if(!saved) return;
+
+const data=JSON.parse(saved);
+
+Object.keys(data).forEach(day=>{
+
+let container=document.getElementById(day+"plans");
+container.innerHTML="";
+
+data[day].forEach((item,index)=>{
+
+let plan=document.createElement("div");
+plan.className="plan";
+
+let content=document.createElement("div");
+content.className="plan-content";
+
+let span=document.createElement("span");
+span.innerText=item.text;
+
+let img=document.createElement("img");
+
+if(item.img){
+img.src=item.img;
+img.style.display="block";
+}else{
+img.style.display="none";
+}
+
+content.appendChild(span);
+content.appendChild(img);
+
+let controls=document.createElement("div");
+
+let file=document.createElement("input");
+file.type="file";
+file.accept="image/*";
+file.style.display="none";
+file.onchange=function(){previewImage(file)}
+
+let upload=document.createElement("button");
+upload.innerText="写真";
+upload.className="upload";
+upload.onclick=function(){file.click()}
+
+let photodel=document.createElement("button");
+photodel.innerText="写真削除";
+photodel.className="photodel";
+photodel.onclick=function(){deletePhoto(photodel)}
+
+let del=document.createElement("button");
+del.innerText="削除";
+del.className="deletebtn";
+del.onclick=function(){deletePlan(del,day)}
+
+controls.appendChild(file);
+controls.appendChild(upload);
+controls.appendChild(photodel);
+controls.appendChild(del);
+
+plan.appendChild(content);
+plan.appendChild(controls);
+
+container.appendChild(plan);
+
+if(index<data[day].length-1){
+let arrow=document.createElement("div");
+arrow.className="arrow";
+arrow.innerText="↓";
+container.appendChild(arrow);
+}
+
+});
+
+});
+
+}
+
 function addPlan(day){
 
 let input=document.getElementById(day+"input");
@@ -342,12 +439,13 @@ container.appendChild(arrow);
 
 input.value="";
 
+saveData();
+
 }
 
 function deletePlan(btn,day){
 
 let plan=btn.closest(".plan");
-
 let arrow=plan.nextElementSibling;
 
 if(arrow && arrow.classList.contains("arrow")){
@@ -358,18 +456,18 @@ plan.remove();
 
 updateNumbers(day);
 
+saveData();
+
 }
 
 function updateNumbers(day){
 
 let container=document.getElementById(day+"plans");
-
 let plans=container.querySelectorAll(".plan");
 
 plans.forEach(function(plan,index){
 
 let span=plan.querySelector("span");
-
 let text=span.innerText.split(" ").slice(1).join(" ");
 
 span.innerText=(index+1)+"  "+text;
@@ -381,7 +479,6 @@ span.innerText=(index+1)+"  "+text;
 function previewImage(input){
 
 let file=input.files[0];
-
 if(!file) return;
 
 let reader=new FileReader();
@@ -389,12 +486,12 @@ let reader=new FileReader();
 reader.onload=function(e){
 
 let plan=input.closest(".plan");
-
 let img=plan.querySelector("img");
 
 img.src=e.target.result;
-
 img.style.display="block";
+
+saveData();
 
 }
 
@@ -405,20 +502,16 @@ reader.readAsDataURL(file);
 function deletePhoto(btn){
 
 let plan=btn.closest(".plan");
-
 let img=plan.querySelector("img");
 
 img.src="";
-
 img.style.display="none";
 
+saveData();
+
 }
 
-
-
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('service-worker.js');
-}
+window.onload=loadData;
 
 </script>
 
