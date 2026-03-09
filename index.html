@@ -111,10 +111,182 @@ background:#666;
 background:#444;
 }
 
+
+
+
+/* 波 */
+
+/* 波 */
+
+.wave{
+position:fixed;
+bottom:0;
+left:0;
+width:200%;
+height:120px;
+background:linear-gradient(to top,#00c6ff,#0099cc);
+opacity:0.4;
+animation:waveMove1 8s linear infinite;
+}
+
+.wave2{
+position:fixed;
+bottom:10px;
+left:0;
+width:200%;
+height:120px;
+background:linear-gradient(to top,#4dd0ff,#00aaff);
+opacity:0.5;
+animation:waveMove2 5s linear infinite;
+}
+
+@keyframes waveMove1{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+@keyframes waveMove2{
+0%{transform:translateX(-50%);}
+100%{transform:translateX(0);}
+}
+
+/* 雲 */
+
+.cloud{
+position:fixed;
+top:80px;
+left:-200px;
+font-size:40px;
+animation:cloudMove 60s linear infinite;
+opacity:0.6;
+}
+
+@keyframes cloudMove{
+0%{left:-200px;}
+100%{left:120%;}
+}
+
+/* ヤシの木 */
+
+.palm{
+position:fixed;
+bottom:130px;
+right:20px;
+font-size:120px;
+line-height:1;
+transform-origin:bottom center;
+animation:palmSwing 3s ease-in-out infinite;
+}
+
+@keyframes palmSwing{
+0%{transform:rotate(-4deg);}
+50%{transform:rotate(4deg);}
+100%{transform:rotate(-4deg);}
+}
+
+/* 写真ホバー */
+
+.plan img{
+transition:0.3s;
+}
+
+.plan img:hover{
+transform:scale(1.2);
+box-shadow:0
+10px 20px rgba(0,0,0,0.4);
+}
+
+
+/* 砂浜 */
+
+.sand{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:80px;
+background:linear-gradient(to top,#f5d79c,#f8e6b8);
+z-index:-1;
+}
+
+
+/* 魚 */
+
+.fish{
+position:fixed;
+bottom:50px;
+right:-120px;
+font-size:32px;
+animation:fishSwim1 18s linear infinite;
+}
+
+.fish2{
+position:fixed;
+bottom:80px;
+right:-150px;
+font-size:28px;
+animation:fishSwim2 25s linear infinite;
+}
+
+@keyframes fishSwim1{
+
+0%{
+right:-120px;
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(10px);
+}
+
+100%{
+right:110%;
+transform:translateY(0);
+}
+
+}
+
+@keyframes fishSwim2{
+
+0%{
+right:-150px;
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(12px);
+}
+
+100%{
+right:110%;
+transform:translateY(0);
+}
+
+}
+
+
+
 </style>
 </head>
 
 <body>
+
+
+<div class="cloud">☁</div>
+<div class="cloud" style="top:150px;animation-duration:80s;">☁</div>
+
+<div class="palm">🌴</div>
+
+<div class="wave"></div>
+<div class="wave2"></div>
+
+<div class="sand"></div>
+
+<div class="fish">🐠</div>
+<div class="fish2">🐟</div>
+
+
+
 
 <header>
 沖縄3泊4日の旅プラン
