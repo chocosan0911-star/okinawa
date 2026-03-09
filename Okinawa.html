@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0099cc">
+
+<meta charset="UTF-8">
+<title>沖縄3泊4日の旅プラン</title>
+
+<style>
+
+body{
+font-family:sans-serif;
+margin:0;
+background:linear-gradient(#64d8ff,#ffffff);
+}
+
+header{
+background:#0099cc;
+color:white;
+text-align:center;
+padding:40px;
+font-size:35px;
+}
+
+.container{
+width:85%;
+margin:auto;
+padding:20px;
+}
+
+.day{
+background:white;
+padding:25px;
+border-radius:15px;
+margin-bottom:30px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.day h2{
+color:#0099cc;
+}
+
+.plan{
+margin-left:20px;
+line-height:2;
+font-size:18px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.plan-content{
+display:flex;
+flex-direction:column;
+width:70%;
+}
+
+.plan img{
+margin-top:10px;
+width:250px;
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+.arrow{
+text-align:center;
+font-size:25px;
+margin:10px;
+}
+
+input{
+padding:8px;
+width:60%;
+margin-top:10px;
+}
+
+button{
+padding:8px 15px;
+background:#0099cc;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-left:5px;
+margin-top:5px;
+}
+
+button:hover{
+background:#0077aa;
+}
+
+.deletebtn{
+background:#ff5555;
+}
+
+.deletebtn:hover{
+background:#cc0000;
+}
+
+.upload{
+background:#ffaa00;
+}
+
+.upload:hover{
+background:#dd8800;
+}
+
+.photodel{
+background:#666;
+}
+
+.photodel:hover{
+background:#444;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+沖縄3泊4日の旅プラン
+</header>
+
+<div class="container">
+
+<!-- Day1 -->
+
+<div class="day">
+
+<h2>Day1 (3月12日)</h2>
+
+<div id="day1plans">
+
+<div class="plan">
+
+<div class="plan-content">
+<span>1  那覇空港到着 / ポーたま</span>
+<img style="display:none;">
+</div>
+
+<div>
+
+<input type="file" accept="image/*" style="display:none" onchange="previewImage(this)">
+
+<button class="upload" onclick="this.previousElementSibling.click()">写真</button>
+
+<button class="photodel" onclick="deletePhoto(this)">写真削除</button>
+
+<button class="deletebtn" onclick="deletePlan(this,'day1')">削除</button>
+
+</div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="plan">
+
+<div class="plan-content">
+<span>2  レンタカー</span>
+<img style="display:none;">
+</div>
+
+<div>
+
+<input type="file" accept="image/*" style="display:none" onchange="previewImage(this)">
+
+<button class="upload" onclick="this.previousElementSibling.click()">写真</button>
+
+<button class="photodel" onclick="deletePhoto(this)">写真削除</button>
+
+<button class="deletebtn" onclick="deletePlan(this,'day1')">削除</button>
+
+</div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="plan">
+
+<div class="plan-content">
+<span>3  国際通り 真珠取り出し体験</span>
+<img style="display:none;">
+</div>
+
+<div>
+
+<input type="file" accept="image/*" style="display:none" onchange="previewImage(this)">
+
+<button class="upload" onclick="this.previousElementSibling.click()">写真</button>
+
+<button class="photodel" onclick="deletePhoto(this)">写真削除</button>
+
+<button class="deletebtn" onclick="deletePlan(this,'day1')">削除</button>
+
+</div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="plan">
+
+<div class="plan-content">
+<span>4  アメリカンビレッジ</span>
+<img style="display:none;">
+</div>
+
+<div>
+
+<input type="file" accept="image/*" style="display:none" onchange="previewImage(this)">
+
+<button class="upload" onclick="this.previousElementSibling.click()">写真</button>
+
+<button class="photodel" onclick="deletePhoto(this)">写真削除</button>
+
+<button class="deletebtn" onclick="deletePlan(this,'day1')">削除</button>
+
+</div>
+
+</div>
+
+</div>
+
+<input type="text" id="day1input" placeholder="予定を入力">
+<button onclick="addPlan('day1')">追加</button>
+
+</div>
+
+
+<!-- Day2 -->
+
+<div class="day">
+<h2>Day2 (3月13日)</h2>
+
+<div id="day2plans"></div>
+
+<input type="text" id="day2input" placeholder="予定を入力">
+<button onclick="addPlan('day2')">追加</button>
+
+</div>
+
+
+<!-- Day3 -->
+
+<div class="day">
+<h2>Day3 (3月14日)</h2>
+
+<div id="day3plans"></div>
+
+<input type="text" id="day3input" placeholder="予定を入力">
+<button onclick="addPlan('day3')">追加</button>
+
+</div>
+
+
+<!-- Day4 -->
+
+<div class="day">
+<h2>Day4 (3月15日)</h2>
+
+<div id="day4plans"></div>
+
+<input type="text" id="day4input" placeholder="予定を入力">
+<button onclick="addPlan('day4')">追加</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+function addPlan(day){
+
+let input=document.getElementById(day+"input");
+let text=input.value;
+
+if(text==="") return;
+
+let container=document.getElementById(day+"plans");
+
+let count=container.querySelectorAll(".plan").length+1;
+
+let plan=document.createElement("div");
+plan.className="plan";
+
+let content=document.createElement("div");
+content.className="plan-content";
+
+let span=document.createElement("span");
+span.innerText=count+"  "+text;
+
+let img=document.createElement("img");
+img.style.display="none";
+
+content.appendChild(span);
+content.appendChild(img);
+
+let controls=document.createElement("div");
+
+let file=document.createElement("input");
+file.type="file";
+file.accept="image/*";
+file.style.display="none";
+file.onchange=function(){previewImage(file)}
+
+let upload=document.createElement("button");
+upload.innerText="写真";
+upload.className="upload";
+upload.onclick=function(){file.click()}
+
+let photodel=document.createElement("button");
+photodel.innerText="写真削除";
+photodel.className="photodel";
+photodel.onclick=function(){deletePhoto(photodel)}
+
+let del=document.createElement("button");
+del.innerText="削除";
+del.className="deletebtn";
+del.onclick=function(){deletePlan(del,day)}
+
+controls.appendChild(file);
+controls.appendChild(upload);
+controls.appendChild(photodel);
+controls.appendChild(del);
+
+plan.appendChild(content);
+plan.appendChild(controls);
+
+container.appendChild(plan);
+
+let arrow=document.createElement("div");
+arrow.className="arrow";
+arrow.innerText="↓";
+
+container.appendChild(arrow);
+
+input.value="";
+
+}
+
+function deletePlan(btn,day){
+
+let plan=btn.closest(".plan");
+
+let arrow=plan.nextElementSibling;
+
+if(arrow && arrow.classList.contains("arrow")){
+arrow.remove();
+}
+
+plan.remove();
+
+updateNumbers(day);
+
+}
+
+function updateNumbers(day){
+
+let container=document.getElementById(day+"plans");
+
+let plans=container.querySelectorAll(".plan");
+
+plans.forEach(function(plan,index){
+
+let span=plan.querySelector("span");
+
+let text=span.innerText.split(" ").slice(1).join(" ");
+
+span.innerText=(index+1)+"  "+text;
+
+});
+
+}
+
+function previewImage(input){
+
+let file=input.files[0];
+
+if(!file) return;
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+let plan=input.closest(".plan");
+
+let img=plan.querySelector("img");
+
+img.src=e.target.result;
+
+img.style.display="block";
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+function deletePhoto(btn){
+
+let plan=btn.closest(".plan");
+
+let img=plan.querySelector("img");
+
+img.src="";
+
+img.style.display="none";
+
+}
+
+
+
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+</body>
+</html>
