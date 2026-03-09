@@ -55,10 +55,17 @@ width:70%;
 }
 
 .plan img{
-margin-top:10px;
-width:250px;
+margin-top:8px;
+width:120px;
 border-radius:10px;
 box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+.photo-group{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:8px;
 }
 
 .arrow{
@@ -299,6 +306,38 @@ transform:scaleX(-1) translateY(0);
 
 
 
+.photo-group{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:10px;
+}
+
+.photo-box{
+position:relative;
+}
+
+.photo-box img{
+width:120px;
+border-radius:10px;
+}
+
+.photo-delete{
+position:absolute;
+top:-8px;
+right:-8px;
+background:red;
+color:white;
+border:none;
+border-radius:50%;
+width:22px;
+height:22px;
+font-size:14px;
+cursor:pointer;
+}
+
+
+
 
 
 </style>
@@ -484,21 +523,30 @@ transform:scaleX(-1) translateY(0);
 const STORAGE_KEY = "okinawaTripData";
 
 function saveData(){
+
 const data={};
 
 ["day1","day2","day3","day4"].forEach(day=>{
+
 let container=document.getElementById(day+"plans");
 let plans=[...container.querySelectorAll(".plan")];
 
 data[day]=plans.map(plan=>{
+
+/* 全画像取得 */
+let imgs=[...plan.querySelectorAll(".photo-box img")].map(img=>img.src);
+
 return{
 text:plan.querySelector("span").innerText,
-img:plan.querySelector("img").src
+imgs:imgs
 }
+
 });
+
 });
 
 localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+
 }
 
 function loadData(){
@@ -524,17 +572,46 @@ content.className="plan-content";
 let span=document.createElement("span");
 span.innerText=item.text;
 
-let img=document.createElement("img");
 
-if(item.img){
-img.src=item.img;
-img.style.display="block";
-}else{
-img.style.display="none";
-}
 
 content.appendChild(span);
-content.appendChild(img);
+
+/* 画像グループ */
+if(item.imgs && item.imgs.length>0){
+
+let group=document.createElement("div");
+group.className="photo-group";
+
+item.imgs.forEach(src=>{
+
+let box=document.createElement("div");
+box.className="photo-box";
+
+let img=document.createElement("img");
+img.src=src;
+
+let delbtn=document.createElement("button");
+delbtn.innerText="×";
+delbtn.className="photo-delete";
+
+delbtn.onclick=function(){
+box.remove();
+saveData();
+}
+
+box.appendChild(img);
+box.appendChild(delbtn);
+
+group.appendChild(box);
+
+});
+
+content.appendChild(group);
+
+}
+
+
+
 
 let controls=document.createElement("div");
 
@@ -581,6 +658,7 @@ container.appendChild(arrow);
 });
 
 }
+
 
 function addPlan(day){
 
@@ -696,10 +774,37 @@ let reader=new FileReader();
 reader.onload=function(e){
 
 let plan=input.closest(".plan");
-let img=plan.querySelector("img");
 
+let container=plan.querySelector(".photo-group");
+
+if(!container){
+container=document.createElement("div");
+container.className="photo-group";
+plan.querySelector(".plan-content").appendChild(container);
+}
+
+/* 写真ボックス */
+let photoBox=document.createElement("div");
+photoBox.className="photo-box";
+
+/* 写真 */
+let img=document.createElement("img");
 img.src=e.target.result;
-img.style.display="block";
+
+/* 削除ボタン */
+let del=document.createElement("button");
+del.innerText="×";
+del.className="photo-delete";
+
+del.onclick=function(){
+photoBox.remove();
+saveData();
+};
+
+photoBox.appendChild(img);
+photoBox.appendChild(del);
+
+container.appendChild(photoBox);
 
 saveData();
 
