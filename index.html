@@ -45,8 +45,14 @@ margin-left:20px;
 line-height:2;
 font-size:30px;
 display:flex;
-justify-content:space-between;
+flex-direction: column; /* 縦並びに変更 */
 align-items:flex-start;
+}
+
+.plan .controls {
+  display: flex;
+  flex-wrap: wrap;       /* 幅が狭い場合は次の行に回る */
+  gap: 5px;              /* ボタン間の隙間 */
 }
 
 .plan-content{
@@ -624,6 +630,8 @@ content.appendChild(group);
 
 let controls=document.createElement("div");
 
+controls.className = "controls";
+
 let file=document.createElement("input");
 file.type="file";
 file.accept="image/*";
@@ -713,6 +721,9 @@ content.appendChild(span);
 content.appendChild(img);
 
 let controls=document.createElement("div");
+
+
+controls.className = "controls";
 
 let file=document.createElement("input");
 file.type="file";
