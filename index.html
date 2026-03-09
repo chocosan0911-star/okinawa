@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -639,6 +640,23 @@ del.onclick=function(){deletePlan(del,day)}
 controls.appendChild(file);
 controls.appendChild(upload);
 controls.appendChild(photodel);
+
+let edit = document.createElement("button");
+edit.innerText = "編集";
+edit.className = "editbtn";
+edit.onclick = function(){
+    let span = plan.querySelector("span");
+    // 番号を除いたテキスト部分だけ取得
+    let currentText = span.innerText.split(" ").slice(1).join(" ");
+    let newText = prompt("予定を編集してください", currentText);
+    if(newText !== null && newText.trim() !== ""){
+        span.innerText = span.innerText.split(" ")[0] + "  " + newText.trim();
+        saveData();
+    }
+}
+
+controls.appendChild(edit);
+
 controls.appendChild(del);
 
 plan.appendChild(content);
@@ -712,6 +730,23 @@ del.onclick=function(){deletePlan(del,day)}
 controls.appendChild(file);
 controls.appendChild(upload);
 controls.appendChild(photodel);
+
+let edit = document.createElement("button");
+edit.innerText = "編集";
+edit.className = "editbtn";
+edit.onclick = function(){
+    let span = plan.querySelector("span");
+    // 番号を除いたテキスト部分だけ取得
+    let currentText = span.innerText.split(" ").slice(1).join(" ");
+    let newText = prompt("予定を編集してください", currentText);
+    if(newText !== null && newText.trim() !== ""){
+        span.innerText = span.innerText.split(" ")[0] + "  " + newText.trim();
+        saveData();
+    }
+}
+
+controls.appendChild(edit);
+
 controls.appendChild(del);
 
 plan.appendChild(content);
