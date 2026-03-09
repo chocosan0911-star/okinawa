@@ -17,7 +17,7 @@ background:#0099cc;
 color:white;
 text-align:center;
 padding:40px;
-font-size:35px;
+font-size:50px;
 }
 
 .container{
@@ -36,12 +36,13 @@ box-shadow:0 8px 20px rgba(0,0,0,0.2);
 
 .day h2{
 color:#0099cc;
+font-size:32px;
 }
 
 .plan{
 margin-left:20px;
 line-height:2;
-font-size:18px;
+font-size:26px;
 display:flex;
 justify-content:space-between;
 align-items:flex-start;
@@ -73,7 +74,8 @@ margin-top:10px;
 }
 
 button{
-padding:8px 15px;
+padding:12px 20px;
+font-size:18px;
 background:#0099cc;
 color:white;
 border:none;
@@ -127,6 +129,7 @@ height:120px;
 background:linear-gradient(to top,#00c6ff,#0099cc);
 opacity:0.4;
 animation:waveMove1 8s linear infinite;
+pointer-events:none;
 }
 
 .wave2{
@@ -138,6 +141,7 @@ height:120px;
 background:linear-gradient(to top,#4dd0ff,#00aaff);
 opacity:0.5;
 animation:waveMove2 5s linear infinite;
+pointer-events:none;
 }
 
 @keyframes waveMove1{
@@ -216,7 +220,7 @@ z-index:-1;
 position:fixed;
 bottom:50px;
 right:-120px;
-font-size:32px;
+font-size:50px;
 animation:fishSwim1 18s linear infinite;
 }
 
@@ -224,7 +228,7 @@ animation:fishSwim1 18s linear infinite;
 position:fixed;
 bottom:80px;
 right:-150px;
-font-size:28px;
+font-size:34px;
 animation:fishSwim2 25s linear infinite;
 }
 
@@ -265,26 +269,36 @@ transform:translateY(0);
 }
 
 
-
-.daynav{
-text-align:center;
-margin-top:20px;
+/* カメ */
+.turtle{
+position:fixed;
+bottom:0px;
+left:-150px;
+font-size:60px;
+animation:turtleSwim 35s linear infinite;
+pointer-events:none;
 }
 
-.daynav a{
-display:inline-block;
-padding:10px 20px;
-margin:5px;
-background:#0099cc;
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
+@keyframes turtleSwim{
+
+0%{
+left:-150px;
+transform:scaleX(-1) translateY(0);
 }
 
-.daynav a:hover{
-background:#0077aa;
+50%{
+transform:scaleX(-1) translateY(10px);
 }
+
+100%{
+left:110%;
+transform:scaleX(-1) translateY(0);
+}
+
+}
+
+
+
 
 
 </style>
@@ -306,28 +320,21 @@ background:#0077aa;
 <div class="fish">🐠</div>
 <div class="fish2">🐟</div>
 
+<div class="turtle">🐢</div>
+
+
 
 
 
 <header>
 沖縄3泊4日の旅プラン
-
-<div class="daynav">
-
-<a href="#day1">Day1</a>
-<a href="#day2">Day2</a>
-<a href="#day3">Day3</a>
-<a href="#day4">Day4</a>
-
-</div>
 </header>
 
 <div class="container">
 
 <!-- Day1 -->
 
-<div class="day" id="day1"></div>
-
+<div class="day">
 
 <h2>Day1 (3月12日)</h2>
 
@@ -433,7 +440,7 @@ background:#0077aa;
 
 <!-- Day2 -->
 
-<div class="day" id="day2"></div>
+<div class="day">
 <h2>Day2 (3月13日)</h2>
 
 <div id="day2plans"></div>
@@ -446,7 +453,7 @@ background:#0077aa;
 
 <!-- Day3 -->
 
-<div class="day" id="day3"></div>
+<div class="day">
 <h2>Day3 (3月14日)</h2>
 
 <div id="day3plans"></div>
@@ -459,7 +466,7 @@ background:#0077aa;
 
 <!-- Day4 -->
 
-<div class="day" id="day4"></div>
+<div class="day">
 <h2>Day4 (3月15日)</h2>
 
 <div id="day4plans"></div>
